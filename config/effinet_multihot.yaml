@@ -1,0 +1,43 @@
+seed: 42
+deterministic: true
+device: "cuda"   # "cpu" если без GPU
+
+data:
+  dir: "data"
+  dish_csv: "dish.csv"
+  ingredients_csv: "ingredients.csv"
+  images_dir: "images"
+  val_frac: 0.10
+  normalize: true
+
+model:
+  image_backbone: "efficientnet_b0"
+  image_pretrained: true
+  img_dim: 512
+  txt_hidden: 256
+  txt_dim: 128
+  head_hidden: 512
+  dropout: 0.2
+
+text_aug:
+  shuffle_p: 0.5
+  dropout_p: 0.2
+  min_left: 1
+
+train:
+  epochs: 20
+  batch_size: 32
+  num_workers: 2
+
+  lr: 0.001
+  weight_decay: 0.0001
+  grad_clip: 1.0
+
+  loss: "huber" 
+  huber_beta: 20.0
+
+  early_stopping_patience: 5
+  min_delta: 0.2
+
+output:
+  dir: "outputs/run_effnet_multihot"
